@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Vanna Winland - Blog</title>
+        <link>https://vwinland.github.io</link>
+        <description>Technical writing on AI, developer tools, and software engineering.</description>
+        <language>en-us</language>
+        <lastBuildDate>Mon, 01 Jun 2026 20:44:47 GMT</lastBuildDate>
+        
+    <item>
+        <title>Getting Started with AI Agents</title>
+        <link>https://vwinland.github.io/blog/getting-started-with-ai-agents</link>
+        <description>A practical introduction to building your first AI agent system, including key concepts, architecture patterns, and getting started tips.</description>
+        <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
+        <category>AI Agents, Getting Started, Tutorial</category>
+        <guid>https://vwinland.github.io/blog/getting-started-with-ai-agents</guid>
+    </item>
+    </channel>
+</rss>
