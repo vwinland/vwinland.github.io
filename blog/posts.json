@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "rise-of-intent-driven-development",
+    "title": "The Rise of Intent-Driven Development",
+    "description": "How spec-driven workflows, context engineering, and constraint authorship are becoming core engineering practices in AI-assisted teams.",
+    "date": "2026-06-02",
+    "tags": [
+      "AI",
+      "Spec-Driven Development",
+      "Context Engineering",
+      "Developer Workflow"
+    ],
+    "readTime": 10,
+    "slug": "rise-of-intent-driven-development",
+    "image": "/projects/sven-mieke-fteR0e2BzKo-unsplash.jpg"
+  },
+  {
+    "id": "software-engineering-after-coding-era",
+    "title": "Software Engineering After the Coding Era",
+    "description": "AI makes code generation cheap; architecture, intent, verification, and governance become the new bottlenecks.",
+    "date": "2026-06-01",
+    "tags": [
+      "AI",
+      "Software Engineering",
+      "Architecture",
+      "Governance"
+    ],
+    "readTime": 7,
+    "slug": "software-engineering-after-coding-era",
+    "image": "/projects/arindam-mahanta-VEOk8qUl9DU-unsplash.jpg"
+  }
+]
