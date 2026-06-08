@@ -14,6 +14,8 @@ series_total: 15
 series_thesis: "how AI is restructuring software development from a craft discipline into an industrial production system"
 series_prev_slug: "software-engineering-after-coding-era"
 series_prev_title: "Software Engineering After the Coding Era"
+series_next_slug: "why-ai-changes-software-faster-than-previous-engineering-revolutions"
+series_next_title: "Why AI Changes Software Faster Than Previous Engineering Revolutions"
 image: "/projects/sven-mieke-fteR0e2BzKo-unsplash.jpg"
 image_credit: "Photo by [Sven Mieke](https://unsplash.com/@sxoxm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/brown-pencil-on-white-printing-paper-fteR0e2BzKo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
