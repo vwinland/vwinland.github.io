@@ -14,6 +14,8 @@ series_total: 15
 series_thesis: "how AI is restructuring software development from a craft discipline into an industrial production system"
 series_prev_slug: "rise-of-intent-driven-development"
 series_prev_title: "The Rise of Intent-Driven Development"
+series_next_slug: "the-developer-workstation-is-becoming-an-autonomous-system"
+series_next_title: "The Developer Workstation Is Becoming an Autonomous System"
 image: "/projects/tom-bronab-h18Dj4zb7WU-unsplash.jpg"
 image_credit: "Photo by [Tom Bronab](https://unsplash.com/@tombronab?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-large-building-with-a-lot-of-windows-h18Dj4zb7WU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
