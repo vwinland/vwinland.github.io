@@ -5,7 +5,7 @@
         <link>https://vwinland.github.io</link>
         <description>Technical writing on AI, developer tools, and software engineering.</description>
         <language>en-us</language>
-        <lastBuildDate>Mon, 08 Jun 2026 16:25:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 08 Jun 2026 19:47:29 GMT</lastBuildDate>
         
     <item>
         <title>Why AI Changes Software Faster Than Previous Engineering Revolutions</title>
@@ -57,6 +57,7 @@
 <p>Previous revolutions were long-horizon events. Cloud, DevOps, and Agile each took the better part of a decade to reshape how most organizations built software. This created pacing that gave teams time to adapt, gave the industry time to develop practices, and gave individual engineers time to build new skills.</p>
 <p>AI is operating on a different timeline, not because the underlying change is smaller, but because the adoption friction is near zero and compression is simultaneous rather than layered. The transformation that took Agile a decade is arriving in years. The governance and skills problems that emerged from previous revolutions over long horizons are arriving in parallel with productivity gains, not after them.</p>
 <p>The organizations that navigate this well will not be the ones who move fastest. They will be the ones who understood early that this transformation was structurally different from what came before, and built accordingly.</p>
+<p><em>Next in the series: &quot;The Developer Workstation Is Becoming an Autonomous System&quot; — How AI IDEs, pair programming agents, and autonomous debugging workflows are turning the individual developer&#39;s environment into an orchestration layer.</em></p>
 ]]></content:encoded>
         <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
         <category>AI, Software Engineering, DevOps, Governance</category>
