@@ -1,7 +1,7 @@
 ---
 title: "The Developer Workstation Is Becoming an Autonomous System"
 description: "The IDE is no longer just where a developer writes code. It is increasingly a system that plans, executes, and self-corrects—shifting the developer's role from author to director."
-date: "2026-06-08"
+date: "2026-06-09"
 tags:
   - AI
   - Developer Tools
