@@ -14,6 +14,8 @@ series_total: 15
 series_thesis: "how AI is restructuring software development from a craft discipline into an industrial production system"
 series_prev_slug: "why-ai-changes-software-faster-than-previous-engineering-revolutions"
 series_prev_title: "Why AI Changes Software Faster Than Previous Engineering Revolutions"
+series_next_slug: "platform-engineering-is-the-new-factory-floor"
+series_next_title: "Platform Engineering Is the New Factory Floor"
 image: "/projects/rohan-dixit-PWY7d4kBFIQ-unsplash.jpg"
 image_credit: "Photo by [Rohan Dixit](https://unsplash.com/@rohandixit211?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/the-control-room-of-a-ship-with-multiple-monitors-PWY7d4kBFIQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
