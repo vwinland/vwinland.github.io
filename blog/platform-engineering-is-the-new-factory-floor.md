@@ -14,6 +14,8 @@ series_total: 15
 series_thesis: "how AI is restructuring software development from a craft discipline into an industrial production system"
 series_prev_slug: "the-developer-workstation-is-becoming-an-autonomous-system"
 series_prev_title: "The Developer Workstation Is Becoming an Autonomous System"
+series_next_slug: "legacy-migration-may-become-ais-largest-empire"
+series_next_title: "Legacy Migration May Become AI's Largest Enterprise Market"
 image: "/projects/xyzcharlize-7b49gfsgQZY-unsplash.jpg"
 image_credit: "Photo by [xyzcharlize](https://unsplash.com/@charlize?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/aerial-photo-of-gray-metal-parts-7b49gfsgQZY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
