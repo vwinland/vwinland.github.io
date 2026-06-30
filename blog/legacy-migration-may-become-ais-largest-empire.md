@@ -14,6 +14,8 @@ series_total: 15
 series_thesis: "how AI is restructuring software development from a craft discipline into an industrial production system"
 series_prev_slug: "platform-engineering-is-the-new-factory-floor"
 series_prev_title: "Platform Engineering Is the New Factory Floor"
+series_next_slug: "vibe-coding-has-a-governance-problem"
+series_next_title: "Vibe Coding Has a Governance Problem"
 image: "/projects/logan-voss-dKBpYgSVbRk-unsplash.jpg"
 image_credit: "Photo by [Logan Voss](https://unsplash.com/@loganvoss?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/abstract-pattern-of-heat-sinks-dKBpYgSVbRk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
