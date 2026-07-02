@@ -6,7 +6,6 @@ tags:
   - Writing
   - Reflection
   - Personal Essay
-  - Relationships
 slug: "arrivals"
 image: "/projects/arrivals-cafe.jpeg"
 ---
