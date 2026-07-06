@@ -14,6 +14,8 @@ series_total: 15
 series_thesis: "how AI is restructuring software development from a craft discipline into an industrial production system"
 series_prev_slug: "legacy-migration-may-become-ais-largest-empire"
 series_prev_title: "Legacy Migration May Become AI's Largest Enterprise Market"
+series_next_slug: "code-review-cannot-scale-to-the-ai-era"
+series_next_title: "Code Review Cannot Scale to the AI Era"
 image: "/projects/julian-hochgesang-3-y9vq8uoxk-unsplash.jpg"
 image_credit: "Photo by [Julian Hochgesang](https://unsplash.com/@julianhochgesang?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/time-lapse-photography-of-vehicles-3-y9vq8uoxk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)"
 ---
