@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vibe Coding Has a Governance Problem | Vanna Winland</title>
+    <meta name="description" content="Vibe coding is fast and useful in the right scope, but without governance it introduces security risk, dependency sprawl, and architectural drift that outpace review." />
+    <link rel="canonical" href="https://vwinland.github.io/blog/vibe-coding-has-a-governance-problem" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Vibe Coding Has a Governance Problem" />
+    <meta property="og:description" content="Vibe coding is fast and useful in the right scope, but without governance it introduces security risk, dependency sprawl, and architectural drift that outpace review." />
+    <meta property="og:url" content="https://vwinland.github.io/blog/vibe-coding-has-a-governance-problem" />
+    <meta property="og:image" content="https://vwinland.github.io/projects/julian-hochgesang-3-y9vq8uoxk-unsplash.jpg" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --surface: #fffaf2;
+        --text: #1f1914;
+        --muted: #6b5f54;
+        --border: #ded3c4;
+        --accent: #915f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: radial-gradient(circle at top, #fff9f0 0%, var(--bg) 55%, #efe2d0 100%);
+        color: var(--text);
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      article {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 22px 60px rgba(73, 45, 20, 0.08);
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,0.7);
+      }
+      .hero {
+        margin: 0 0 28px;
+      }
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+      .hero figcaption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .hero figcaption a,
+      .content a,
+      .back:hover {
+        color: var(--accent);
+      }
+      .content h1,
+      .content h2,
+      .content h3 {
+        line-height: 1.2;
+        margin-top: 2rem;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 1.25rem;
+      }
+      .content blockquote {
+        border-left: 4px solid var(--accent);
+        margin-left: 0;
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+      .content img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .content code {
+        background: rgba(145, 95, 54, 0.08);
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 14px;
+        background: #231911;
+        color: #f7efe5;
+      }
+      @media (max-width: 640px) {
+        main { padding: 20px 14px 48px; }
+        article { padding: 22px 18px; border-radius: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="https://vwinland.github.io/blog">Back to blog</a>
+      <article>
+        <header>
+          <h1>Vibe Coding Has a Governance Problem</h1>
+          <p class="meta">June 30, 2026</p>
+          <p class="tags"><span>AI</span><span>Governance</span><span>Software Engineering</span><span>Security</span></p>
+          <figure class="hero"><img src="https://vwinland.github.io/projects/julian-hochgesang-3-y9vq8uoxk-unsplash.jpg" alt="Vibe Coding Has a Governance Problem" /><figcaption>Photo by <a href="https://unsplash.com/@julianhochgesang?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Julian Hochgesang</a> on <a href="https://unsplash.com/photos/time-lapse-photography-of-vehicles-3-y9vq8uoxk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></figcaption></figure>
+        </header>
+        <div class="content">
+          <h1>Vibe Coding Has a Governance Problem</h1>
+<p>It&#39;s 4:47 on a Friday. A developer types a sentence describing what they want, hits enter, and watches the AI write the implementation, wire up the dependencies, and hand back working code before their coffee goes cold. It runs on the first try. Nobody wrote a test for it, so nothing fails. The pull request gets approved in the time it takes to skim the diff, and the feature is live before the standup on Monday.</p>
+<p>Nobody on the team could fully explain how it works. Not because it&#39;s complicated, but because nobody had to think about it long enough to find out. The prompt was the spec. The output was the product. The part where a human sits with the logic, traces the edge cases, and decides whether this is actually a good way to solve the problem never happened.</p>
+<p>This is vibe coding: describing an outcome and accepting whatever code arrives that produces it, with little inspection of what&#39;s underneath. It&#39;s also, more and more, how production software actually gets written, even if nobody has a clean number for how much.</p>
+<p>The speed is real. The risk is structural, not incidental, and it doesn&#39;t show up in the demo.</p>
+<hr>
+<p><strong>The Case for Not Looking Too Closely</strong></p>
+<p>It&#39;s worth being honest about why vibe coding caught on, because the reasons are good ones. A lot of code was never going to need to last. A spike to test whether an integration is feasible. A script that reformats a file once and gets deleted. A dashboard built to answer this week&#39;s question, not run for the next five years. None of that calls for the scrutiny a payments system requires, and pretending otherwise isn&#39;t rigor. It&#39;s just waste, applied to work that was never going to carry that kind of risk.</p>
+<p>Vibe coding also lowers the cost of finding out whether an idea is worth pursuing at all. The fastest way to learn that a product concept doesn&#39;t work is often to build a rough version of it and watch it fail, and that loop used to require an engineer&#39;s time before anyone knew if the idea deserved it. Compressing that loop to minutes instead of days is a genuine gain, not a corner cut.</p>
+<p>And it has put real capability into the hands of people who were never going to learn to code the traditional way. That path assumes you&#39;ll stay motivated long enough to build someone else&#39;s idea of &quot;the basics&quot; before you&#39;re allowed to build the thing you actually want. For a lot of people, that&#39;s exactly where the motivation runs out, long before the fundamentals do. Vibe coding skips the part that doesn&#39;t work and starts at the part that does: building the actual thing.</p>
+<p>None of this is new in kind. Copy-pasted Stack Overflow answers, scaffolding generators, and code written by junior engineers under deadline pressure have been shipping under-scrutinized logic into production for decades. Vibe coding inherits that risk category. It doesn&#39;t invent it. What&#39;s different is the speed and the volume, and that difference is exactly what turns a familiar, manageable risk into something that can outrun the controls built to catch it.</p>
+<p>The honest claim isn&#39;t that vibe coding is reckless. It&#39;s that vibe coding has a correct operating envelope, low-stakes, disposable, exploratory work, and most of the damage shows up when code written for that envelope ends up load-bearing somewhere it was never built to hold.</p>
+<hr>
+<p><strong>What Gets Lost When Review Becomes Optional</strong></p>
+<p>Traditional development has a bottleneck built into it: a human has to write the code. Writing it was never a guarantee that someone understood it. But it forced a kind of contact with the logic that simply accepting a finished answer doesn&#39;t. Where does this data go? Who can call this function? What happens when this input is malformed? A developer typing line by line answers those questions, even informally, because typing requires deciding.</p>
+<p>AI-generated code collapses that bottleneck without replacing what it did. The model produces a plausible answer to the prompt, not necessarily a correct or safe one, and plausibility is not the same property as soundness. The code can run, pass a quick test, and still be the wrong design: insecure defaults, missing authorization checks, a SQL query built with string concatenation in a function that looks identical to a parameterized one. Nothing about the surface signals which kind it is.</p>
+<p>That gap between looking right and being right is closely related to what AI researchers call hallucination, though in software development it often appears in a subtler form. The code compiles, runs, and produces plausible outputs while still embedding incorrect assumptions, insecure patterns, or flawed logic. <a href="https://arxiv.org/abs/2211.03622">Researchers at Stanford tested this directly</a>: developers given access to an AI coding assistant wrote measurably less secure code than developers working without one, and were simultaneously more likely to believe their code was secure. The tool didn&#39;t just fail to catch the problem. It made the problem harder to see. That&#39;s tolerable in a script nobody depends on. It&#39;s a different problem entirely once the code is handling user data, auth, or money, and nobody flagged the shift.</p>
+<hr>
+<p><strong>The Vulnerabilities Vibe Coding Tends to Produce</strong></p>
+<p>A few failure modes show up consistently enough to be worth naming directly.</p>
+<p>Security defaults get skipped. Models trained on a wide distribution of public code reproduce whatever patterns are common in that distribution, including insecure ones. <a href="https://dl.acm.org/doi/10.1145/3610721">One of the first systematic studies of this</a> tested GitHub Copilot against 89 security-focused programming scenarios built from MITRE&#39;s top security weakness categories and found that roughly 40% of the generated solutions contained vulnerabilities. A request for &quot;a login form&quot; or &quot;a file upload endpoint&quot; is more likely to return something that works in the demo than something that resists the obvious attack against it, because the training data is full of code that does the former and not always the latter.</p>
+<p>Dependencies multiply faster than anyone is tracking them, and increasingly, they don&#39;t even need to be real. AI models sometimes invent plausible-sounding package names that don&#39;t exist in any registry, a problem researchers call package hallucination. <a href="https://www.usenix.org/system/files/usenixsecurity25-spracklen.pdf">A 2025 study presented at USENIX Security</a> generated over 576,000 code samples across sixteen models and found that nearly one in five recommended packages didn&#39;t exist anywhere, with 43% of those invented names repeating consistently enough across prompts to be predictable. That predictability is what makes the gap exploitable: an attacker may be able to register a package name the model repeatedly invents and wait for developers or automated workflows to install it. Security researchers have started calling the resulting attack slopsquatting. Even when every dependency is real, each one added is still a new piece of the supply chain nobody on the team chose deliberately or added to an inventory. Sprawl accumulates in increments too small to notice until the count is large enough to matter.</p>
+<p>Architectural drift happens by default, not by mistake. Every AI-generated change is locally coherent: it solves the prompt in front of it. Nothing about that process accounts for how the change fits the system&#39;s existing patterns, layering, or ownership boundaries. Without someone actively enforcing consistency, a codebase assembled this way accumulates contradictory approaches to the same problem, solved differently each time, because each solution was generated in isolation from the others.</p>
+<p>Hidden vulnerabilities survive specifically because the code works. A function with a logic flaw that breaks the build gets caught immediately. A function with a security flaw that still returns the correct output for every test case anyone thought to write can ship clean and stay in production until something exploits it. Correctness on the happy path is the easiest property to verify and the least useful one for catching this category of problem.</p>
+<hr>
+<p><strong>Why This Isn&#39;t a Tooling Problem</strong></p>
+<p>The instinct is to treat this as something a better model or a smarter linter eventually fixes. That undersells what&#39;s actually happening.</p>
+<p>AI removed friction from the part of software development that produces code. It did nothing to remove friction from the part that produces consequences. A vulnerability shipped in ten seconds is exploited on the same timeline as a vulnerability that took a developer two days to write. The downstream cost of insecure code, the breach, the outage, the compliance failure, doesn&#39;t scale down just because the generation step got faster. If anything, the volume problem makes it worse: more surface area, generated faster, reviewed at the same human pace as before.</p>
+<p>This is the same asymmetry that shows up everywhere else in this series. Generation scales easily. Verification scales only when organizations invest deliberately in the systems that make it possible. A development process where code arrives faster than anyone can meaningfully evaluate it is not actually faster. It has just moved the bottleneck downstream, to the point where the cost shows up after the damage instead of before it.</p>
+<hr>
+<p><strong>The Assumption That Doesn&#39;t Hold</strong></p>
+<p>There&#39;s an obvious rebuttal to all of this, and it deserves to be taken seriously rather than waved off. Vibe coding, the argument goes, is the immature version of the problem. Replace the loose prompt-and-accept loop with spec-driven development, wrap it in a governed agentic pipeline that plans, executes, tests, and self-corrects against a defined contract, and the risk this essay describes should mostly close. The bottleneck doesn&#39;t move. It gets automated.</p>
+<p>That assumption is worth testing against what&#39;s actually happening at the more sophisticated end of this spectrum, not the careless end.</p>
+<p><a href="https://www.gravitee.io/blog/state-of-ai-agent-security-2026-report-when-adoption-outpaces-control">A 2026 industry survey of more than 900 executives and technical practitioners</a> reported a wide gap between confidence and visibility, not a confirmed measurement of harm, but a pattern worth taking seriously on its own terms. 82% of executives said they felt confident their existing policies protected them from unauthorized agent actions. The same respondents reported that only 47.1% of their organization&#39;s AI agents were actually being monitored or secured, and 88% said they had confirmed or suspected an AI agent security incident that year. Self-reported suspicion isn&#39;t proof an incident occurred. But the confidence-versus-visibility gap itself is the more interesting finding here, and it&#39;s the same shape as the Stanford result above, reproduced at the organizational level, in teams that explicitly believed they had governance in place.</p>
+<p>Agent skills, the modular, packaged, reusable capabilities that are supposed to represent the mature, productized version of agentic coding, tell a similar story. <a href="https://arxiv.org/abs/2601.10338">A 2026 empirical study</a> analyzed over 31,000 published agent skills and found that 26.1% contained at least one security vulnerability, spanning prompt injection, data exfiltration, privilege escalation, and supply chain risk. These aren&#39;t loose, unreviewed prompts. They&#39;re packaged components built for reuse, the kind of artifact a spec-driven shop would actually adopt. A quarter of them were dangerous anyway.</p>
+<p>What this suggests is that &quot;good enough&quot; agentic tooling doesn&#39;t make the operating envelope irrelevant. It moves it. Spec-driven development can close the gap between what was asked for and what was built. It does less to close the gap between what was specified and what should have been specified, because that gap was never a tooling problem to begin with. A spec is still written under deadline pressure by people who don&#39;t always know which edge case matters until it&#39;s exploited. Governance can verify conformance to a contract. It can&#39;t verify that the contract was the right one, and the same speed that made vibe coding attractive without scrutiny is what makes thin specs attractive once the scrutiny has a more sophisticated name.</p>
+<hr>
+<p><strong>What Governance-First Vibe Coding Would Require</strong></p>
+<p>None of this is an argument against AI-generated code, agentic or otherwise. It&#39;s an argument against treating either generation speed or governance infrastructure as the finish line, when the actual work is making sure the thing being verified was worth verifying in the first place.</p>
+<p>A few principles separate organizations getting real value from this from organizations accumulating risk they haven&#39;t measured yet.</p>
+<p>Review has to happen somewhere, even if not everywhere. Not every line generated needs a human reading it character by character, but every codebase needs an enforced policy about what gets automated scanning, what gets human review, and what&#39;s allowed to ship without either. The absence of that policy is itself the governance failure, regardless of how good the AI is.</p>
+<p>Security checks need to be structural, not optional. Static analysis, dependency scanning, and policy-as-code enforcement need to run automatically against every AI-generated change, in the pipeline, not as a step someone can skip under deadline pressure. The same speed that makes vibe coding attractive makes manual security review unsustainable as the primary control.</p>
+<p>Provenance has to be tracked. Knowing which code was AI-generated, which model produced it, and what prompt produced it isn&#39;t bureaucratic overhead. It&#39;s the information needed to investigate an incident, audit a dependency tree, or figure out why a pattern appears inconsistently across a codebase.</p>
+<p>Architecture has to be enforced by something other than habit. AI systems don&#39;t inherently respect the boundaries a team has agreed to. Golden paths, internal developer portals, and platform-level constraints exist precisely to give generation a shape to conform to, the same governance infrastructure earlier essays in this series describe as the new factory floor.</p>
+<hr>
+<p><strong>Closing</strong></p>
+<p>The pattern from this series keeps repeating. Generation gets cheap. Consequences don&#39;t. Every previous bottleneck this series has examined, code review, platform standardization, legacy migration, was a place where human judgment used to be required by necessity. AI removes the necessity without removing the requirement. The organizations that treat governance as the next feature to build, rather than the thing slowing down the real work, are the ones that get to keep the speed.</p>
+<p>Vibe coding isn&#39;t reckless by nature. It&#39;s scoped for disposable, low-stakes work, and most of the damage happens when nobody notices the moment that code stops being disposable. Better tooling can reduce real portions of that risk, but it doesn&#39;t eliminate the need for judgment. More often, it changes where the failure modes appear: from a careless prompt to a confident spec, from an individual developer&#39;s false sense of security to an organization&#39;s. The fix isn&#39;t slowing generation down, and it isn&#39;t a more sophisticated pipeline either. It&#39;s knowing, deliberately, when something has crossed out of the envelope it was built for, and treating that moment, not the next model release, as the trigger for everything review, scanning, and architecture are supposed to catch.</p>
+<p><em>Next in the series: &quot;Code Review Cannot Scale to the AI Era&quot; — why the human review bottleneck that used to catch exactly these problems is breaking down under AI-generated volume, and what has to replace it.</em></p>
+
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
