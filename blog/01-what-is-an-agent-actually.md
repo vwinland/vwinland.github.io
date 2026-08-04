@@ -12,6 +12,8 @@ series: "Actually Agentic"
 series_order: 1
 series_total: 5
 series_thesis: "how agentic systems coordinate, where they fail, and what remains unresolved"
+series_next_slug: "agentic-coordination-isnt-new-its-25-years-old"
+series_next_title: "Agentic Coordination Isn't New. It's 25 Years Old"
 image: "/projects/essay_1_header_agent_stack.png"
 ---
 

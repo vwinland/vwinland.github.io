@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old | Vanna Winland</title>
+    <meta name="description" content="A 1999 NASA collective-intelligence report reframed as a lens for understanding modern multi-agent LLM coordination." />
+    <link rel="canonical" href="https://vwinland.github.io/blog/agentic-coordination-isnt-new-its-25-years-old/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old" />
+    <meta property="og:description" content="A 1999 NASA collective-intelligence report reframed as a lens for understanding modern multi-agent LLM coordination." />
+    <meta property="og:url" content="https://vwinland.github.io/blog/agentic-coordination-isnt-new-its-25-years-old/" />
+    <meta property="og:image" content="https://vwinland.github.io/projects/essay_2_header_old_robot_new_robot_v2.png" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --surface: #fffaf2;
+        --text: #1f1914;
+        --muted: #6b5f54;
+        --border: #ded3c4;
+        --accent: #915f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: radial-gradient(circle at top, #fff9f0 0%, var(--bg) 55%, #efe2d0 100%);
+        color: var(--text);
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      article {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 22px 60px rgba(73, 45, 20, 0.08);
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,0.7);
+      }
+      .hero {
+        margin: 0 0 28px;
+      }
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+      .hero figcaption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .hero figcaption a,
+      .content a,
+      .back:hover {
+        color: var(--accent);
+      }
+      .content h1,
+      .content h2,
+      .content h3 {
+        line-height: 1.2;
+        margin-top: 2rem;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 1.25rem;
+      }
+      .content blockquote {
+        border-left: 4px solid var(--accent);
+        margin-left: 0;
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+      .content img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .content code {
+        background: rgba(145, 95, 54, 0.08);
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 14px;
+        background: #231911;
+        color: #f7efe5;
+      }
+      @media (max-width: 640px) {
+        main { padding: 20px 14px 48px; }
+        article { padding: 22px 18px; border-radius: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="https://vwinland.github.io/blog">Back to blog</a>
+      <article>
+        <header>
+          <h1>Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old</h1>
+          <p class="meta">August 4, 2026</p>
+          <p class="tags"><span>AI</span><span>Agentic AI</span><span>Multi-Agent Systems</span><span>Software Engineering</span></p>
+          <figure class="hero"><img src="https://vwinland.github.io/projects/essay_2_header_old_robot_new_robot_v2.png" alt="Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old" /></figure>
+        </header>
+        <div class="content">
+          <h1>Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old</h1>
+<p><em>What a 1999 NASA report on distributed AI tells us about today’s multi-agent systems.</em></p>
+<p>In 2024, while researching an explainer on ChatDev for IBM Think, I ran into a phrase in the project’s own GitHub README that stopped me: the framework described itself as a way to study <em>collective intelligence</em> in LLM-orchestrated multiagent systems. That’s an unusual claim for a coding-agent tool to make, so I went and found out what “collective intelligence” actually meant in this context instead of taking the phrase at face value. The trail didn’t stay in 2024. It ran back through a 2010 definition of collective intelligence, a 1989 paper on multiagent task decomposition, and landed on a 1999 NASA Ames technical report by David Wolpert and Kagan Tumer: <a href="https://arxiv.org/abs/cs/9908014">An Introduction to Collective Intelligence</a>.</p>
+<p>That report has nothing to do with language models. It’s actually about reinforcement learning in large distributed systems, written before anyone had a language model capable of holding a conversation. Despite that, the problem it’s solving is close enough to what multiagent frameworks, like the early ones I’ve studied (ChatDev, MetaGPT, and crewAI) were each built to do. </p>
+<h1>The setup</h1>
+<p>Wolpert and Tumer were interested in what they called a COllective INtelligence, or COIN: a system made up of many agents, with little to no centralized communication between them, where some outside observer has a way of scoring how well the whole system performed – a “world utility.” Each individual agent, meanwhile, is only trying to maximize its own reward, learned through reinforcement learning, with no direct access to that world utility at all. </p>
+<p>The central design problem they posed is this: assuming each agent gets good at maximizing its own private reward, what should that reward actually be, such that agents chasing it also happen to push the world utility up? Get the private rewards wrong, and you get agents that are individually successful and collectively useless; or worse, actively working against each other. Wolpert and Tumer named specific failure patterns to watch for: agents converging on the same overcrowded solution instead of spreading out to cover different parts of a problem, agents whose “improvements” cancel each other out, whole systems that get worse the more each individual agent optimizes itself.</p>
+<p>That’s the tragedy of the commons, restated as an engineering problem instead of an economics one. It’s the entire question the report exists to answer. </p>
+<h1>The pivot</h1>
+<p>Swap a few words and this stops sounding like 1999.<br>Replace “private reward function” with “system prompt” or “role.” Replace “world utility” with however the outcome actually gets judged: what the human wanted, and some way of checking whether they got it. In a toy COIN example that’s a scoring function, in a real deployment, that’s often where governance comes in. Suddenly, ChatDev’s CEO, CTO, and programmer agent personas, the ones that shaped how the framework was originally built, read like a 2023 answer to a question posed in 1999. This describes the phase-chained architecture the ChatDev project itself now calls “1.0, Legacy.” More on where the project went next in a moment – the point here is about the underlying problem, not the specific implementation.</p>
+<p>Each agent in ChatDev, MetaGPT, or crewAI is given a private specification: a role, a set of instructions, a slice of responsibility, with the hope that if every agent follows its own slice well, the whole system produces what the human actually asked for. That’s the COIN problem, wearing natural language instead of a reward function. (Same caveat applies to MetaGpt as to ChatDev above: its open-source repository hasn’t shipped a release since April 2024 – the team’s current work lives elsewhere, and shows up later in this essay.) </p>
+<p>These three keep coming up in this series for a reason, not because they’re the only ones that exist: they’re the ones I <a href="https://vwinland.github.io/tutorials">built</a> with hands-on for IBM over the last two years, after an earlier piece on LLM orchestration that led me to start digging into agent frameworks specifically. That meant actually running each one – building a three-agent crewAI crew powered by <a href="http://watsonx.ai">watsonx.ai</a> to analyze customer service transcripts, forking ChatDev’s own source code to wire in a new model backend, and standing up a MetaGPT team with Ollama and DeepSeek to draft and revise a product requirements document – not reading documentation and summarizing it secondhand. Everything in this essay about their architecture comes from that hands-on work, not a survey of the whole multi-agent landscape. </p>
+<h1>The uncomfortable part</h1>
+<p>Wolpert and Tumer were explicit about what doesn’t work: the conventional approach to this problem, in their telling, is to model the dynamics of the whole system in detail and then hand-tune each agent’s behavior until the pieces cooperate. They flagged this approach as effortful and inclined to produce brittle systems that don’t hold up as the system grows or the environment changes. That’s a real bar to usefulness for something meant to work at scale in situations that weren’t specifically modeled in advance. </p>
+<p>That’s a fair description of the dominant design pattern in multi-agent LLM frameworks – the one that won the adoption, even if it wasn’t the only one being tried (more on that in a moment). Roles get hand-authored by a person who read the requirements and wrote down what the CEO agent should do, what the CTO agent should do, what the programmer agents should do. It’s the same design move Wolpert and Tumer flagged 25 years earlier, just executed in prose instead of code, and it inherits the same fragility they described: it works for the cases the human author thought of, and it’s brittle outside them. </p>
+<p>This isn’t a swipe at ChatDev, MetaGPT, or crewAI specifically – hand-authored roles were the dominant pattern among the multi-agent frameworks that got the most attention and adoption after 2023. “Dominant” isn’t “universal,” though: in the same period, <a href="https://arxiv.org/abs/2308.10848">AgentVerse</a> built a recruitment phase that adds and removes agents based on progress instead of a fixed roster, and a framework literally called <a href="https://arxiv.org/abs/2309.17288">AutoAgents</a> set out to generate agent roles automatically rather than have a human write them. The hand-authored pattern won more adoption, but it was never the only approach on the table, even at the start. </p>
+<h1>Why it mostly works anyway</h1>
+<p>The honest complication is that it works better than the 1999 warning would predict. LLMs bring something reinforcement-learning agents from that era never had – a huge amount of pretrained world knowledge and a real ability to follow natural-language instructions without needing a hand-shaped reward signal to get there. A hand-written role like “you are a meticulous QA engineer, flag any test that doesn’t match the specification” gives an LLM agent enough to work with in a way that a hand-shaped numeric reward never could for an RL agent starting from nothing. </p>
+<p>That’s genuine progress. But it’s progress in the substrate the roles run on, not a resolution of the underlying coordination-design question. The fragility Wolpert and Turned described – hand-tuned interactions that work for anticipated cases and break outside them – hasn’t been solved. It’s just less visible, because the model underneath is strong enough to paper over more of the cracks than an RL policy could. </p>
+<h1>A second precedent, briefly</h1>
+<p>COIN isn’t the only piece of decades-old work worth knowing about here. Leslie Lamport – the computer scientist behind the Paxos consensus algorithm and the formal specification language TLA+ – has long argued for <a href="https://softwareengineeringdaily.com/2016/02/26/distributed-systems-with-leslie-lamport/">writing a system’s specification before writing its code</a>, not after. That’s a more literal ancestor of “spec-first” as a design philosophy than anything in COIN, which is really about incentives, not specification methodology. It’s a separate thread from the one this essay is pulling on, and it deserves its own space rather than a rushed paragraph here – it comes back properly later in this series.</p>
+<h1>What happened next</h1>
+<p>The most interesting part of this story isn’t that COIN predicted a problem current frameworks still have. It’s what happened when the people who built those frameworks noticed it themselves. </p>
+<p>ChatDev’s own team didn’t stop at the hand-authored CEO/CTO/programmer pipeline. In 2024, they published <a href="https://arxiv.org/abs/2406.07155">MacNet</a>, which treats the <em>topology</em> connecting agents – not just their individual roles – as something to design deliberately, scaling cooperation across thousands of agents using directed graph structures instead of a fixed chain. In 2025 they went further with <a href="https://arxiv.org/abs/2505.19591">Puppeteer</a>: a central orchestrator, trained with reinforcement learning, that learns which agents to activate and in what order, rather than following a hand-written sequence. </p>
+<p>MetaGPT’s team made the same move. Their original framework hand-authored structured roles and standard operating procedures. Their follow-up, <a href="https://arxiv.org/abs/2410.10762">AFlow</a>, searches for effective agent workflows automatically, using tree search over code-represented workflows instead of a person writing the workflow by hand. </p>
+<p>The people who wrote the roles by hand came back, on their own, to build systems that write the roles instead. Not a separate camp of academics pointing out a flaw from the outside – the original authors, revisiting their own designs, arriving independently at something close to Wolpert and Tumer’s implicit suggestion 25 years earlier: don’t hand-tune the interaction structure, let it be learned. Whether that fully closes the gap COIN identified is a separate question.</p>
+<p>For now, the more immediate one is what these hand-authored systems actually look like up close, and where their coordination choices show up as real, specific failure modes. That’s next.</p>
+
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
