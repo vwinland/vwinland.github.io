@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build Log: Ask My Archive | Vanna Winland</title>
+    <meta name="description" content="I built a retrieval-augmented Q&amp;A tool over my own published essays. This is the log of building it — the actual decisions, in order, with real numbers and real code." />
+    <link rel="canonical" href="https://vwinland.github.io/blog/build-log-ask-my-archive/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Build Log: Ask My Archive" />
+    <meta property="og:description" content="I built a retrieval-augmented Q&amp;A tool over my own published essays. This is the log of building it — the actual decisions, in order, with real numbers and real code." />
+    <meta property="og:url" content="https://vwinland.github.io/blog/build-log-ask-my-archive/" />
+    <meta property="og:image" content="https://vwinland.github.io/projects/header_image.png" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --surface: #fffaf2;
+        --text: #1f1914;
+        --muted: #6b5f54;
+        --border: #ded3c4;
+        --accent: #915f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: radial-gradient(circle at top, #fff9f0 0%, var(--bg) 55%, #efe2d0 100%);
+        color: var(--text);
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      article {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 22px 60px rgba(73, 45, 20, 0.08);
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,0.7);
+      }
+      .hero {
+        margin: 0 0 28px;
+      }
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+      .hero figcaption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .hero figcaption a,
+      .content a,
+      .back:hover {
+        color: var(--accent);
+      }
+      .content h1,
+      .content h2,
+      .content h3 {
+        line-height: 1.2;
+        margin-top: 2rem;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 1.25rem;
+      }
+      .content blockquote {
+        border-left: 4px solid var(--accent);
+        margin-left: 0;
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+      .content img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .content code {
+        background: rgba(145, 95, 54, 0.08);
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 14px;
+        background: #231911;
+        color: #f7efe5;
+      }
+      @media (max-width: 640px) {
+        main { padding: 20px 14px 48px; }
+        article { padding: 22px 18px; border-radius: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="https://vwinland.github.io/blog">Back to blog</a>
+      <article>
+        <header>
+          <h1>Build Log: Ask My Archive</h1>
+          <p class="meta">August 8, 2026</p>
+          <p class="tags"><span>AI</span><span>RAG</span><span>Python</span><span>Software Engineering</span></p>
+          <figure class="hero"><img src="https://vwinland.github.io/projects/header_image.png" alt="Build Log: Ask My Archive" /></figure>
+        </header>
+        <div class="content">
+          <p><a href="https://github.com/vwinland/ask-my-archive">I built a RAG tool over my own writing</a>. Here&#39;s what I learned.</p>
+<p>I&#39;ve spent the last several months writing about agentic AI, multi-agent coordination, governance. All from the outside. Research, reading, synthesis. Real work, but not the same as building the thing.</p>
+<p>So I built something. A retrieval-augmented Q&amp;A tool over my own published essays. Ask it a question, it retrieves the relevant excerpts from my blog, HackerNoon, IBM Think, wherever, and answers grounded in what I actually wrote, with citations back to the source.</p>
+<p>This is the log of building it. Not a polished retrospective. The actual decisions, in the order I had to make them, with the real numbers and the real code.</p>
+<h2>The corpus was messier than I expected</h2>
+<p>I assumed inventorying my own writing would be the easy part. It wasn&#39;t.</p>
+<p>My blog is canonical. Sixteen posts. But most of them are syndicated to HackerNoon under a different title. HackerNoon editors review and often retitle to match their guidelines and optimize for search engines. &quot;Romanticism Has a New Villain&quot; on my blog is &quot;A24&#39;s AI Backlash Is an Old Creative Argument in New Clothes&quot; on HackerNoon. Same essay. Different string entirely.</p>
+<p>If I&#39;d naively indexed both platforms, I&#39;d have had near-duplicate chunks competing against each other in retrieval, under titles that don&#39;t obviously match. So one post gets treated as canonical, and every other platform it lives on gets stored as metadata on that same entry, not as a separate document.</p>
+<p>The blog/HackerNoon problem was the trickiest case, but it&#39;s one piece of a bigger picture. My writing actually lives across four different sources, each with a different relationship to syndication:</p>
+<ul>
+<li><strong>My personal blog</strong> — the canonical source for 16 essays, most of them also syndicated to HackerNoon (title changes) or Medium (title stays the same)</li>
+<li><strong>IBM Think</strong> — 27 pieces (explainers, tutorials, one insights piece) that are native to that platform, no syndication involved</li>
+<li><strong>The IBM tutorials GitHub repo</strong> — markdown and notebook source files for a subset of those IBM Think tutorials, useful because the repo&#39;s markdown is cleaner to parse than scraping the live page</li>
+<li><strong>Medium</strong> — home to two personal essays, syndicated from the blog, separate from the HackerNoon-syndicated technical pieces</li>
+</ul>
+<p>That&#39;s why the schema has a <code>primary_platform</code> field with more than two options, and why <code>platform_urls</code> is a dict rather than two hardcoded fields. Here&#39;s the actual schema:</p>
+<pre><code class="language-python">@dataclass
+class SourceDocument:
+    canonical_title: str
+    primary_platform: str  # &quot;blog&quot; | &quot;ibm_think&quot; | &quot;ibmdotcom_tutorials&quot;
+    content_type: str  # &quot;essay&quot; | &quot;personal_essay&quot; | &quot;explainer&quot; | &quot;tutorial&quot;
+    published_date: str
+    body: str
+
+    syndicated_titles: dict = field(default_factory=dict)
+    platform_urls: dict = field(default_factory=dict)
+    series: str | None = None
+    co_authors: list[str] = field(default_factory=list)
+</code></pre>
+<p>One document, one <code>platform_urls</code> dict holding every place it lives. <code>syndicated_titles</code> holds the HackerNoon and Medium titles alongside the canonical one, so a title mismatch never gets mistaken for a different essay. A blog post ends up with two or three entries in that dict; an IBM Think piece, with no syndication, ends up with just the one.</p>
+<p>I pulled the actual title mapping from my own HackerNoon stats export rather than guessing from search snippets, then verified every URL against the live page&#39;s HTML directly, since HackerNoon sometimes appends a hash suffix that a slugified guess won&#39;t predict. Slower than assuming a pattern. Also correct, which assuming a pattern was not.</p>
+<p>Two of the sixteen posts are personal essays rather than technical ones, and get tagged differently (<code>content_type: &quot;personal_essay&quot;</code>) so a query about my technical writing doesn&#39;t accidentally surface something personal, or vice versa.</p>
+<h2>Chunking: start simple, notice what breaks</h2>
+<p>I chunked by paragraph. The simplest strategy available. A one-sentence paragraph becomes a weak, low-context chunk on its own, so anything under 200 characters gets merged into its neighbor before it&#39;s stored:</p>
+<pre><code class="language-python">def merge_short_paragraphs(paragraphs: list[str]) -&gt; list[str]:
+    merged = []
+    buffer = &quot;&quot;
+    for p in paragraphs:
+        buffer = f&quot;{buffer}\n\n{p}&quot;.strip() if buffer else p
+        if len(buffer) &gt;= MIN_CHUNK_CHARS:
+            merged.append(buffer)
+            buffer = &quot;&quot;
+    if buffer:
+        if merged:
+            merged[-1] = f&quot;{merged[-1]}\n\n{buffer}&quot;
+        else:
+            merged.append(buffer)
+    return merged
+</code></pre>
+<p>Sixteen posts became 392 chunks. Averaging roughly 24 chunks per post, though that varies a lot by how long the piece is and how choppy my paragraphing is in any given essay.</p>
+<p>I didn&#39;t reach for a fancier chunking strategy up front, like splitting by semantic similarity or a fixed token count. The plan was get the whole loop working end to end first, then go back and tune. Optimizing chunk size before I&#39;d even confirmed retrieval worked at all would have been solving a problem I hadn&#39;t verified I had.</p>
+<h2>What &quot;embedding&quot; actually means here, concretely</h2>
+<p>A quick grounding note, since this term does a lot of work in RAG systems and I want to actually understand it, not just use it.</p>
+<p>An embedding is a list of numbers that represents the meaning of a piece of text. Two chunks about similar ideas end up with similar number-lists, even if they don&#39;t share any of the same words. That&#39;s what makes &quot;search by meaning&quot; possible instead of just keyword matching.</p>
+<p>I used <code>all-MiniLM-L6-v2</code>, a small model that runs locally and turns each chunk into a list of 384 numbers. When I ask a question, the question gets turned into a list of 384 numbers the same way, and the system finds which stored chunks have the closest numbers to the question&#39;s numbers. That&#39;s retrieval. Nothing more mysterious than a distance calculation, run 392 times, sorted, and the closest few returned.</p>
+<h2>Local embeddings, on purpose</h2>
+<p>My corpus is roughly forty documents once every source is in. A hosted embedding API is built for a scale I don&#39;t need. It adds an API key dependency and a per-call cost for zero real benefit at this size.</p>
+<p><code>all-MiniLM-L6-v2</code> runs locally and free. One-time download (about 90MB), then it just works, no per-query cost, no network dependency after that.</p>
+<p>To say it plainly: the fanciest available option is not automatically the right one. Match the infrastructure to the actual scale of the problem, not to what everyone defaults to.</p>
+<h2>No distance-based relevance cutoff, on purpose</h2>
+<p>When retrieval comes back with nothing genuinely relevant, does the system filter out the weak matches before they reach the model, or hand the model everything and trust it to say so itself?</p>
+<p>I went with the second option. At forty documents I have no labeled relevance set to calibrate a distance threshold against. A hardcoded cutoff would be a guess dressed up as a number. An explicit instruction in the prompt instead: tell me if you can&#39;t answer this from what you&#39;re given. That&#39;s a legible, testable failure mode instead of an arbitrary one.</p>
+<p>That decision got tested directly, and it held.</p>
+<h2>The test that actually mattered</h2>
+<p>I ran three questions against the finished pipeline, through two different models: Claude, and a free local model (Llama 3.1) running through Ollama on my own laptop, no API key, no cost.</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Ollama result</th>
+<th>Claude result</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Well-covered: &quot;What has Vanna written about how AI changes code review?&quot;</td>
+<td>Correct answer, 1 source cited</td>
+<td>Correct answer, 3 sources cited, quoted source text directly</td>
+</tr>
+<tr>
+<td>Near-miss: &quot;What does Vanna think about quantum computing?&quot;</td>
+<td>Correctly declined, 0 sources cited</td>
+<td>Correctly declined, 0 sources cited, named what the excerpts <em>did</em> cover first</td>
+</tr>
+<tr>
+<td>Cross-essay synthesis: &quot;How does Vanna connect agentic coordination to platform governance?&quot;</td>
+<td>Correct synthesis, 2 sources cited</td>
+<td>Correct synthesis, 3 sources cited</td>
+</tr>
+</tbody></table>
+<p>The near-miss row is the one that matters. A RAG system that confidently invents an answer when it doesn&#39;t have one is worse than a system that does nothing. That failure mode is the actual risk in a tool like this, and it&#39;s silent until you go looking for it.</p>
+<p>Both models declined correctly. Neither fabricated a connection to quantum computing. Both hit 100% compliance on the citation format I&#39;d asked for in the prompt, which genuinely surprised me for a 4.9GB local model with no fine-tuning and no few-shot examples.</p>
+<p>Where they differed was depth, not correctness. Claude&#39;s answers quoted my own source text back to me, and at one point flagged my own hedging: it noticed a line where I&#39;d written that &quot;the tooling is ahead of the measurement,&quot; and used that against my own overconfidence, which is a very funny thing for a tool built from my own writing to do to me. Claude also pulled in one extra relevant essay on the synthesis question, one that Ollama&#39;s retrieval had also surfaced but didn&#39;t weave into its answer. Ollama&#39;s answers were shorter, correct, more bullet-summary than argument.</p>
+<p>Running all three questions through Claude&#39;s API cost nine cents.</p>
+<p>The honest takeaway is not &quot;local models are just as good.&quot; It&#39;s narrower and more useful than that: on this specific task, at this scale, the failure mode that actually threatens trust in a RAG tool didn&#39;t discriminate between a frontier model and a free one running on my own machine. The gap was in richness of the answer, not in whether I could trust it.</p>
+<h2>Where this leaves me</h2>
+<p>Sixteen blog posts fully indexed, syndication metadata verified and attached, retrieval and generation proven end to end on a real corpus, tested against the one failure mode that actually matters. Twenty-seven IBM Think pieces and a tutorials repo still to add. A chat interface still to build.</p>
+<p>More than that, though: I have a real, tested answer to a question I&#39;d only argued about from the outside before this. Does a free local model hold up against a frontier one, for a task like this, at this scale? Yes, on the thing that actually matters. That&#39;s a different kind of knowing than reading about it.</p>
+
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
