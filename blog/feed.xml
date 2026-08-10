@@ -5,13 +5,14 @@
         <link>https://vwinland.github.io/</link>
         <description>Technical writing on AI, developer tools, and software engineering.</description>
         <language>en-us</language>
-        <lastBuildDate>Sat, 08 Aug 2026 22:07:31 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 10 Aug 2026 16:59:26 GMT</lastBuildDate>
         
     <item>
         <title>Build Log: Ask My Archive</title>
         <link>https://vwinland.github.io/blog/build-log-ask-my-archive/</link>
         <description>I built a retrieval-augmented Q&amp;A tool over my own published essays. This is the log of building it — the actual decisions, in order, with real numbers and real code.</description>
         <content:encoded><![CDATA[<p><a href="https://github.com/vwinland/ask-my-archive">I built a RAG tool over my own writing</a>. Here&#39;s what I learned.</p>
+<p><em>A note: I built this with Claude Code doing the implementation, directed by me. Worth being explicit about that, since it&#39;s the more honest version of what &quot;I built this&quot; means here. The architecture, the schema design, the chunking and retrieval decisions, and the judgment calls throughout were mine. The Python was typed by an agent I was steering.</em></p>
 <p>I&#39;ve spent the last several months writing about agentic AI, multi-agent coordination, governance. All from the outside. Research, reading, synthesis. Real work, but not the same as building the thing.</p>
 <p>So I built something. A retrieval-augmented Q&amp;A tool over my own published essays. Ask it a question, it retrieves the relevant excerpts from my blog, HackerNoon, IBM Think, wherever, and answers grounded in what I actually wrote, with citations back to the source.</p>
 <p>This is the log of building it. Not a polished retrospective. The actual decisions, in the order I had to make them, with the real numbers and the real code.</p>
