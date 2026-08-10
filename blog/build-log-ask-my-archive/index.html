@@ -85,6 +85,47 @@
         color: var(--muted);
         font-size: 0.82rem;
       }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
       .hero figcaption a,
       .content a,
       .back:hover {
@@ -140,6 +181,17 @@
           <p class="tags"><span>AI</span><span>RAG</span><span>Python</span><span>Software Engineering</span></p>
           <figure class="hero"><img src="https://vwinland.github.io/projects/header_image.png" alt="Build Log: Ask My Archive" /></figure>
         </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">Ask My Archive Build Log</p>
+          <p class="series-progress">Part 1 of 2</p>
+          <p>This series explores the real decisions, bugs, and deployment lessons behind Ask My Archive.</p>
+          <div class="series-links">
+            <span></span>
+            <a href="https://vwinland.github.io/blog/build-log-deployment-debugging/">Next: Build Log: Deployment Debugging</a>
+          </div>
+        </section>
         <div class="content">
           <p><a href="https://github.com/vwinland/ask-my-archive">I built a RAG tool over my own writing</a>. Here&#39;s what I learned.</p>
 <p><em>A note: I built this with Claude Code doing the implementation, directed by me. Worth being explicit about that, since it&#39;s the more honest version of what &quot;I built this&quot; means here. The architecture, the schema design, the chunking and retrieval decisions, and the judgment calls throughout were mine. The Python was typed by an agent I was steering.</em></p>

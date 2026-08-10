@@ -85,6 +85,47 @@
         color: var(--muted);
         font-size: 0.82rem;
       }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
       .hero figcaption a,
       .content a,
       .back:hover {
@@ -140,6 +181,17 @@
           <p class="tags"><span>AI</span><span>Spec-Driven Development</span><span>Context Engineering</span><span>Developer Workflow</span></p>
           <figure class="hero"><img src="https://vwinland.github.io/projects/sven-mieke-fteR0e2BzKo-unsplash.jpg" alt="The Rise of Intent-Driven Development" /><figcaption>Photo by <a href="https://unsplash.com/@sxoxm?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sven Mieke</a> on <a href="https://unsplash.com/photos/brown-pencil-on-white-printing-paper-fteR0e2BzKo?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></figcaption></figure>
         </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">The Industrialization of Software Engineering</p>
+          <p class="series-progress">Part 2 of 15</p>
+          <p>This series explores how AI is restructuring software development from a craft discipline into an industrial production system.</p>
+          <div class="series-links">
+            <a href="https://vwinland.github.io/blog/software-engineering-after-coding-era/">Previous: Software Engineering After the Coding Era</a>
+            <a href="https://vwinland.github.io/blog/why-ai-changes-software-faster-than-previous-engineering-revolutions/">Next: Why AI Changes Software Faster Than Previous Engineering Revolutions</a>
+          </div>
+        </section>
         <div class="content">
           <h1>The Rise of Intent-Driven Development</h1>
 <p>The following is what a modern AI-assisted software session can look like today.</p>

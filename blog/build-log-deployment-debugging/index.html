@@ -85,6 +85,47 @@
         color: var(--muted);
         font-size: 0.82rem;
       }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
       .hero figcaption a,
       .content a,
       .back:hover {
@@ -140,9 +181,20 @@
           <p class="tags"><span>AI</span><span>RAG</span><span>Python</span><span>Deployment</span></p>
           <figure class="hero"><img src="https://vwinland.github.io/projects/ask-my-archive-header-banner.png" alt="Build Log: Deployment Debugging" /></figure>
         </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">Ask My Archive Build Log</p>
+          <p class="series-progress">Part 2 of 2</p>
+          <p>This series explores the real decisions, bugs, and deployment lessons behind Ask My Archive.</p>
+          <div class="series-links">
+            <a href="https://vwinland.github.io/blog/build-log-ask-my-archive/">Previous: Build Log: Ask My Archive</a>
+            
+          </div>
+        </section>
         <div class="content">
           <p>It worked locally. Then I deployed it.</p>
-<p>I shipped the first build log on Ask My Archive feeling done. Retrieval worked, generation was grounded, the near-miss test passed, I had a real comparison between a paid model and a free one. Good milestone. Then I deployed the thing publicly, asked it the first question, and got back &quot;cannot find any information&quot; on a topic I know for a fact my archive covers.</p>
+<p>I shipped <a href="https://vwinland.github.io/blog/build-log-ask-my-archive/">the first build log</a> on Ask My Archive feeling done. Retrieval worked, generation was grounded, the near-miss test passed, I had a real comparison between a paid model and a free one. Good milestone. Then I deployed the thing publicly, asked it the first question, and got back &quot;cannot find any information&quot; on a topic I know for a fact my archive covers.</p>
 <p>Nothing about the pipeline was wrong. Everything about where it was running was different than what I&#39;d tested.</p>
 <p>I deployed with Streamlit, the shortest path from a working Python script to something a stranger can open in a browser. No separate frontend to build, deploys free straight from a GitHub repo. Fastest way to turn a CLI tool into a link.</p>
 <p>A note on how this actually got built: I directed this project with Claude Code doing the implementation. I didn&#39;t type the Python by hand. I designed the architecture and the metadata schema, made the calls on chunking strategy, decided against a distance-based relevance cutoff, chose local embeddings over a hosted API because I understood the scale I was working at, and directed the debugging below, including pushing back when an early explanation didn&#39;t match the evidence. It&#39;s not the same as writing every line myself, and I don&#39;t think it needs to be.</p>
@@ -221,7 +273,8 @@
   Your browser does not support the video tag.
 </video>
 
-<p>Full comparison data and the deployment debugging notes are in the repo, alongside everything from the first build.</p>
+<p>Try it yourself: <a href="https://ask-my-archive-gkuq5o8tdvnc7cs3wwpcth.streamlit.app/">ask-my-archive-gkuq5o8tdvnc7cs3wwpcth.streamlit.app</a>. Ask it the quantum computing question if you want to watch the decline happen live.</p>
+<p>Full <a href="https://github.com/vwinland/ask-my-archive/blob/main/query/comparison_results.md">comparison results</a> and <a href="https://github.com/vwinland/ask-my-archive/blob/main/NOTES-deployment-debugging.md">deployment debugging notes</a> are in the <a href="https://github.com/vwinland/ask-my-archive">GitHub repo</a>, alongside everything from the first build.</p>
 
         </div>
       </article>

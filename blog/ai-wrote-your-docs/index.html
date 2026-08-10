@@ -85,6 +85,47 @@
         color: var(--muted);
         font-size: 0.82rem;
       }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
       .hero figcaption a,
       .content a,
       .back:hover {
@@ -140,6 +181,7 @@
           <p class="tags"><span>AI</span><span>Documentation</span><span>Technical Writing</span><span>Developer Experience</span></p>
           <figure class="hero"><img src="https://vwinland.github.io/projects/christa-dodoo-MldQeWmF2_g-unsplash.jpg" alt="AI Wrote Your Docs. Nobody Read Them." /><figcaption>Photo by <a href="https://unsplash.com/@krystagrusseck?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Christa Dodoo</a> on <a href="https://unsplash.com/photos/pile-of-papers-MldQeWmF2_g?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></figcaption></figure>
         </header>
+        
         <div class="content">
           <h1>AI Wrote Your Docs. Nobody Read Them.</h1>
 <p>There’s a specific kind of dread that sets in when you open a documentation folder and realize the AI didn’t write <em>to</em> your users. It wrote <em>at</em> them. Nobody reads it. </p>

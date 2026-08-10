@@ -85,6 +85,47 @@
         color: var(--muted);
         font-size: 0.82rem;
       }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
       .hero figcaption a,
       .content a,
       .back:hover {
@@ -140,6 +181,17 @@
           <p class="tags"><span>AI</span><span>Agentic AI</span><span>Multi-Agent Systems</span><span>Software Engineering</span></p>
           <figure class="hero"><img src="https://vwinland.github.io/projects/essay_2_header_old_robot_new_robot_v2.png" alt="Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old" /></figure>
         </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">Actually Agentic</p>
+          <p class="series-progress">Part 2 of 5</p>
+          <p>This series explores how agentic systems coordinate, where they fail, and what remains unresolved.</p>
+          <div class="series-links">
+            <a href="https://vwinland.github.io/blog/what-is-an-agent-actually/">Previous: What Is an Agent, Actually?</a>
+            
+          </div>
+        </section>
         <div class="content">
           <h1>Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old</h1>
 <p><em>What a 1999 NASA report on distributed AI tells us about today’s multi-agent systems.</em></p>
