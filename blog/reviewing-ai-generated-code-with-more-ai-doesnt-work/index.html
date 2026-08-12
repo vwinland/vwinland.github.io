@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reviewing AI-Generated Code With More AI Doesn’t Work | Vanna Winland</title>
+    <meta name="description" content="AI review tools can speed up pull request analysis, but without an independent verification layer they can recapitulate the same blind spots they’re supposed to catch." />
+    <link rel="canonical" href="https://vwinland.github.io/blog/reviewing-ai-generated-code-with-more-ai-doesnt-work/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Reviewing AI-Generated Code With More AI Doesn’t Work" />
+    <meta property="og:description" content="AI review tools can speed up pull request analysis, but without an independent verification layer they can recapitulate the same blind spots they’re supposed to catch." />
+    <meta property="og:url" content="https://vwinland.github.io/blog/reviewing-ai-generated-code-with-more-ai-doesnt-work/" />
+    <meta property="og:image" content="https://vwinland.github.io/projects/xavier-crook-fGlKowA-J3E-unsplash.jpg" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --surface: #fffaf2;
+        --text: #1f1914;
+        --muted: #6b5f54;
+        --border: #ded3c4;
+        --accent: #915f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: radial-gradient(circle at top, #fff9f0 0%, var(--bg) 55%, #efe2d0 100%);
+        color: var(--text);
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      article {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 22px 60px rgba(73, 45, 20, 0.08);
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,0.7);
+      }
+      .hero {
+        margin: 0 0 28px;
+      }
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+      .hero figcaption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
+      .hero figcaption a,
+      .content a,
+      .back:hover {
+        color: var(--accent);
+      }
+      .content h1,
+      .content h2,
+      .content h3 {
+        line-height: 1.2;
+        margin-top: 2rem;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 1.25rem;
+      }
+      .content blockquote {
+        border-left: 4px solid var(--accent);
+        margin-left: 0;
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+      .content img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .content code {
+        background: rgba(145, 95, 54, 0.08);
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 14px;
+        background: #231911;
+        color: #f7efe5;
+      }
+      @media (max-width: 640px) {
+        main { padding: 20px 14px 48px; }
+        article { padding: 22px 18px; border-radius: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="https://vwinland.github.io/blog">Back to blog</a>
+      <article>
+        <header>
+          <h1>Reviewing AI-Generated Code With More AI Doesn’t Work</h1>
+          <p class="meta">August 12, 2026</p>
+          <p class="tags"><span>AI</span><span>Code Review</span><span>Verification</span><span>Software Engineering</span></p>
+          <figure class="hero"><img src="https://vwinland.github.io/projects/xavier-crook-fGlKowA-J3E-unsplash.jpg" alt="Reviewing AI-Generated Code With More AI Doesn’t Work" /><figcaption>Photo by <a href="https://unsplash.com/@profxavier26?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Xavier crook</a> on <a href="https://unsplash.com/photos/grayscale-photo-of-metal-gate-fGlKowA-J3E?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></figcaption></figure>
+        </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">The Industrialization of Software Engineering</p>
+          <p class="series-progress">Part 9 of 15</p>
+          <p>This series explores how AI is restructuring software development from a craft discipline into an industrial production system.</p>
+          <div class="series-links">
+            <a href="https://vwinland.github.io/blog/code-review-cannot-scale-to-the-ai-era/">Previous: Code Review Cannot Scale to the AI Era</a>
+            
+          </div>
+        </section>
+        <div class="content">
+          <h1>Reviewing AI-Generated Code With More AI Doesn’t Work</h1>
+<p><em>From the series: The Industrialization of Software Engineering</em></p>
+<p><a href="https://vwinland.github.io/blog/vibe-coding-has-a-governance-problem/">The last essay</a> in this series ended with a question. If review confidence is drifting away from actual risk, does testing pick up the slack, or does something else have to replace the review gate entirely? </p>
+<p>The industry’s answer, mostly, is to automate the gate. Route low-risk changes through CI (continuous integration) checks. Save human attention for the changes that cross a defined threshold. That’s a real improvement over waiting days for a colleague to find time. It’s also not the whole fix. </p>
+<p>A second answer has grown fast alongside it: have AI review the AI. Tools like <a href="https://www.sonarsource.com/resources/library/best-ai-code-review-tools/">Sonar’s Gitar</a>, CodeRabbit, and Cursor’s Bugbot now read a pull request with full repo context, flag or fix what they find, validate the fix against CI, and escalate to a human only when something’s genuinely uncertain. It’s one of the fastest growing tool categories in this space, and it’s solving a real problem: automated analysis that used to require a human’s attention can now run in minutes instead of waiting days for one to be free.</p>
+<p>However, the numbers say something is still broken. <a href="https://dora.dev/insights/balancing-ai-tensions/">DORA</a> ran a thematic deep-dive into 1,110 open-ended survey responses from Google engineers in Q3 2025, separate from its main annual survey, and found that higher AI adoption correlated with both higher software delivery throughput and higher software delivery instability at the same time. Not a tradeoff. Both climbing together. <a href="https://www.manilatimes.net/2026/08/04/tmt-newswire/globenewswire/checksum-launches-the-continuous-quality-loop-verification-that-keeps-pace-with-ai-written-code/2398120/amp">Checksum’s State of AI Code 2026 report</a>, a survey of 105 engineering leaders, found 61 percent shipped a production incident originating in AI-generated code in the last 90 days, after that code has already passed the reviews and unit tests already in place. In the same survey, just over half of leaders said their review cycles had grown by 25 percent or more since adopting AI coding tools, while adoption of AI-generated unit tests, the layer meant to catch what review misses, sat at under half.  </p>
+<p>Automating the gate faster doesn’t explain that gap by itself. Neither does AI reviewing AI. <a href="https://arxiv.org/pdf/2603.25773">One structural explanation</a>, from a researcher who tested Claude reviewing Claude-generated code against a planted-bug corpus, points at something specific: when the model that writes the code and the model that reviews it come from the same family, they can carry the same blind spots into both jobs. The review ends up checking the code against another model’s opinion of itself rather than against the original intent. The author is careful to call this directional evidence, not a controlled demonstration, but it lines up with what the DORA and Checksum numbers already show: a gap opening up between how fast code gets generated and how well it gets checked. </p>
+<p>That’s one plausible explanation for the gap, not a proven mechanism. Either way, verification built entirely out of AI, however fast, risks staying circular. It needs something to check against that didn’t come from the same place the code did. </p>
+<p>A written specification is one version of that anchor: a description of intended behavior that exists independently of whatever generated the implementation. But a spec still needs a way to be checked against, and that’s where deterministic, non-AI tools do real work. Some of those tools have existed far longer than this problem has. <a href="https://literateprogramming.com/mccabe.pdf">Cyclomatic complexity</a>, a measure Thomas McCabe introduced in 1976, counts the number of linearly independent paths through a function’s control-flow graph. McCabe built it as a practical alternative to counting every possible execution path directly, since that number can be enormous or infinite once loops are involved. The measure doesn’t care who or what wrote the function, and it doesn’t share a training distribution with anything: it applies the same structural calculation regardless of the source. It also doesn’t tell you whether the code does what the spec says. A function can be structurally simple and still be wrong. That’s the point: mechanical checks like this are one layer in a stack, not a stand-in for verifying intent. Tests, contracts, static and security analysis, and build checks each do a different piece of work, all of it running as fixed, deterministic steps rather than another model’s judgement call. </p>
+<p>The architecture that emerges from this isn’t “review, but automated.” It’s layers doing distinct jobs: a specification stating intent, a deterministic pipeline checking mechanical properties against something that doesn’t guess, and AI review held back for the judgement calls left over once the deterministic layers have done their work. Even Sonar, a company selling AI code review, describes its own product this way: Gitar’s AI review sits alongside SonarQube’s deterministic analysis, not in place of it. It’s just no longer being asked to be the whole system by itself. </p>
+<p>The review gate didn’t need to get faster. It needed something outside the loop to check against, the same thing every checkpoint in the old SDLC used to provide before the phases collapsed into one continuous conversation with a model. Continuous verification, done tight, isn’t a nice version of review. It’s rebuilding the thing review always depended on, using pieces that don’t share the blind spots of whatever they’re checking. </p>
+
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
