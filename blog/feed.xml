@@ -5,7 +5,7 @@
         <link>https://vwinland.github.io/</link>
         <description>Technical writing on AI, developer tools, and software engineering.</description>
         <language>en-us</language>
-        <lastBuildDate>Wed, 12 Aug 2026 18:13:44 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 12 Aug 2026 18:27:47 GMT</lastBuildDate>
         
     <item>
         <title>Reviewing AI-Generated Code With More AI Doesn’t Work</title>
@@ -22,6 +22,9 @@
 <p>A written specification is one version of that anchor: a description of intended behavior that exists independently of whatever generated the implementation. But a spec still needs a way to be checked against, and that’s where deterministic, non-AI tools do real work. Some of those tools have existed far longer than this problem has. <a href="https://literateprogramming.com/mccabe.pdf">Cyclomatic complexity</a>, a measure Thomas McCabe introduced in 1976, counts the number of linearly independent paths through a function’s control-flow graph. McCabe built it as a practical alternative to counting every possible execution path directly, since that number can be enormous or infinite once loops are involved. The measure doesn’t care who or what wrote the function, and it doesn’t share a training distribution with anything: it applies the same structural calculation regardless of the source. It also doesn’t tell you whether the code does what the spec says. A function can be structurally simple and still be wrong. That’s the point: mechanical checks like this are one layer in a stack, not a stand-in for verifying intent. Tests, contracts, static and security analysis, and build checks each do a different piece of work, all of it running as fixed, deterministic steps rather than another model’s judgement call. </p>
 <p>The architecture that emerges from this isn’t “review, but automated.” It’s layers doing distinct jobs: a specification stating intent, a deterministic pipeline checking mechanical properties against something that doesn’t guess, and AI review held back for the judgement calls left over once the deterministic layers have done their work. Even Sonar, a company selling AI code review, describes its own product this way: Gitar’s AI review sits alongside SonarQube’s deterministic analysis, not in place of it. It’s just no longer being asked to be the whole system by itself. </p>
 <p>The review gate didn’t need to get faster. It needed something outside the loop to check against, the same thing every checkpoint in the old SDLC used to provide before the phases collapsed into one continuous conversation with a model. Continuous verification, done tight, isn’t a nice version of review. It’s rebuilding the thing review always depended on, using pieces that don’t share the blind spots of whatever they’re checking. </p>
+<h2>Closing</h2>
+<p>The teams solving this aren&#39;t the ones with the fastest AI reviewer. They&#39;re the ones who figured out what a checkpoint actually needs to be checking against, and uilt that first. </p>
+<p>Next in the series: once verification stops depending on human judgement for most of what used to require it, what&#39;s actually left for engineers to do, and how is that role starting to split. </p>
 ]]></content:encoded>
         <pubDate>Wed, 12 Aug 2026 00:00:00 GMT</pubDate>
         <category>AI, Code Review, Verification, Software Engineering</category>
