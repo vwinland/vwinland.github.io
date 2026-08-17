@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Build Log: Scaling the Archive, Then Trying to Break It | Vanna Winland</title>
+    <meta name="description" content="I expanded Ask My Archive to 43 documents and tested whether the public system was actually safe to leave running in production." />
+    <link rel="canonical" href="https://vwinland.github.io/blog/build-log3-ask-my-archive/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Build Log: Scaling the Archive, Then Trying to Break It" />
+    <meta property="og:description" content="I expanded Ask My Archive to 43 documents and tested whether the public system was actually safe to leave running in production." />
+    <meta property="og:url" content="https://vwinland.github.io/blog/build-log3-ask-my-archive/" />
+    <meta property="og:image" content="https://vwinland.github.io/projects/header_growth.png" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --surface: #fffaf2;
+        --text: #1f1914;
+        --muted: #6b5f54;
+        --border: #ded3c4;
+        --accent: #915f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: radial-gradient(circle at top, #fff9f0 0%, var(--bg) 55%, #efe2d0 100%);
+        color: var(--text);
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      article {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 22px 60px rgba(73, 45, 20, 0.08);
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,0.7);
+      }
+      .hero {
+        margin: 0 0 28px;
+      }
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+      .hero figcaption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
+      .hero figcaption a,
+      .content a,
+      .back:hover {
+        color: var(--accent);
+      }
+      .content h1,
+      .content h2,
+      .content h3 {
+        line-height: 1.2;
+        margin-top: 2rem;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 1.25rem;
+      }
+      .content blockquote {
+        border-left: 4px solid var(--accent);
+        margin-left: 0;
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+      .content img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .content code {
+        background: rgba(145, 95, 54, 0.08);
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 14px;
+        background: #231911;
+        color: #f7efe5;
+      }
+      @media (max-width: 640px) {
+        main { padding: 20px 14px 48px; }
+        article { padding: 22px 18px; border-radius: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="https://vwinland.github.io/blog">Back to blog</a>
+      <article>
+        <header>
+          <h1>Build Log: Scaling the Archive, Then Trying to Break It</h1>
+          <p class="meta">August 12, 2026</p>
+          <p class="tags"><span>AI</span><span>RAG</span><span>Python</span><span>Security</span></p>
+          <figure class="hero"><img src="https://vwinland.github.io/projects/header_growth.png" alt="Build Log: Scaling the Archive, Then Trying to Break It" /></figure>
+        </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">Ask My Archive Build Log</p>
+          <p class="series-progress">Part 3 of 3</p>
+          <p>This series explores the real decisions, bugs, and deployment lessons behind Ask My Archive.</p>
+          <div class="series-links">
+            <a href="https://vwinland.github.io/blog/build-log-deployment-debugging/">Previous: Build Log: Deployment Debugging</a>
+            
+          </div>
+        </section>
+        <div class="content">
+          <h1>Build Log 3: Scaling the Archive, Then Trying to Break It</h1>
+<p>The first two build logs got the core working and deployed. This one covers what came next: expanding the archive as far as I could find material, then finding out whether it was actually safe to leave running in public.</p>
+<p>A note on process: Claude Code did the implementation, but I directed it — architecture, the metadata schema, chunking strategy, local embeddings over a hosted API, and the debugging calls throughout, including overriding a mislabeled taxonomy tag because I&#39;d written the piece myself.</p>
+<h2>Expanding the corpus</h2>
+<p>The archive started with 16 blog posts. I&#39;d also published 27 pieces on IBM Think — 14 explainers, 12 tutorials, and one more I only found by digging through my author page. Indexing them meant two new loaders solving problems the blog loader never had to.</p>
+<p>My portfolio site lists every IBM Think piece, but the pages are a client-rendered React SPA with no server-side HTML to scrape. Instead of standing up a headless browser, the loader parses the plain arrays straight out of my portfolio&#39;s source files, which it already clones for the blog corpus. Always-current, one less moving part.</p>
+<p>Metadata — content type, published date, byline — gets pulled from the live page rather than assumed from where I&#39;d filed it. That distinction mattered once: the loader was told to trust a page&#39;s own content-type label over my categorization, a reasonable default that was wrong exactly once. One piece I wrote as an explainer carried an external tag marking it a tutorial. The loader followed its instruction correctly and got it wrong anyway, because the instruction&#39;s premise didn&#39;t hold on that page. Claude flagged the mismatch while walking me through the output. If I&#39;d skimmed past it, a wrong tag would have gone straight into the metadata. I overrode it explicitly, documented inline — and it&#39;s a reminder that reviewing model output as it comes, not just the final diff, is where catches like this actually happen.</p>
+<p>Co-authorship was more common than I remembered. I&#39;d flagged two pieces going in as possibly co-authored; actually checking every byline turned up ten, including one credited to three of us.</p>
+<p>The 12 tutorials double as write-ups of code in IBM&#39;s public tutorials repo, and my tutorial cards link straight to the exact file in my fork. So instead of fuzzy-matching by title, the loader verifies the path exists upstream and pulls body text from there. Some source files are Jupyter notebooks mixing prose, code, and run output; the loader keeps the writing and code, drops the output — a stack trace is a log, not content. For tutorials whose link points at a folder instead of a file, it picks the real write-up out by matching filename to folder name.</p>
+<p>Result: 43 documents, 1,749 chunks. I re-ran my three standing test questions against the expanded corpus (a well-covered question, a quantum-computing near-miss to check the system admits what it doesn&#39;t know, and a two-essay question), then added two new ones for the IBM Think content. All five passed. One is worth flagging: the LlamaIndex question retrieved exactly the right chunks, but the model reading them misread a footnote citation as an authorship credit. Retrieval and generation are two different failure points — worth being precise about which one actually broke.</p>
+<h2>Triaging an automated security review</h2>
+<p>GitHub Copilot&#39;s security review came back with one &quot;critical&quot; finding, four &quot;high priority,&quot; and a nine-step remediation plan. I checked each against the actual repo before touching anything.</p>
+<p><strong>The &quot;critical&quot; finding didn&#39;t hold up.</strong> Copilot flagged my local <code>.env</code> file as a compromised secret. I checked the full commit history — never committed, on any branch, ever. The scanner flagged a plaintext file on disk without checking whether it had ever left the machine. (A scanner reading the file to analyze it is its own small version of that question, so I rotated the keys anyway — cheap insurance.)</p>
+<p><strong>One finding was accurate but aimed at the wrong deployment.</strong> The devcontainer config disables CORS and XSRF — true, but that only applies inside a GitHub Codespaces session, not the live app, which runs on Streamlit&#39;s own hosting. Codespaces commonly needs those checks off because its networking breaks otherwise. I left it and added a comment explaining the scope, so nobody mistakes a dev convenience for a production setting.</p>
+<p><strong>Two findings were real but assumed a different kind of system.</strong> No auth, no rate limiting — true, and an open endpoint can genuinely be flooded, scraped, or hit with expensive queries. But it&#39;s a public form by design, on a free backend chosen so usage spikes can&#39;t cause billing risk, and there&#39;s nothing sensitive behind it. The realistic failure mode is a slow or unavailable demo, not a data breach — a tradeoff I made deliberately rather than a risk I missed. Retrieved text going straight into the prompt as &quot;untrusted input&quot; — a legitimate concern for a RAG system ingesting outside content. Every document in this corpus is first-party, written by me, which narrows that threat model considerably. It doesn&#39;t erase it outright, though: the pipeline still pulls from live external pages and a GitHub repo, and trusts that content hasn&#39;t changed underneath it since I wrote it.</p>
+<p><strong>One finding was correct and cheap to fix.</strong> Dependencies weren&#39;t pinned to exact versions. Fixed — locked all eight direct dependencies to the versions already tested.</p>
+<p>I fed my corrected assessment back to Copilot; it agreed and downgraded its own recommendation to a shorter checklist. Two items were worth doing. Pinning was already done. I ran <code>pip-audit</code> against the pinned versions and it found one real, named vulnerability in the vector database library — a code-injection bug, but only when the library runs as a network server with <code>trust_remote_code</code> enabled. This project runs it embedded in-process, and that setting never appears in the code anywhere. A real vulnerability in a mode this app never turns on.</p>
+<p>Net result: two real fixes (pinned dependencies, a documentation comment), everything else confirmed either fine or built for a threat this app doesn&#39;t face. Every finding in the original report was technically accurate; almost none of it was urgent. Severity depends on context a scanner doesn&#39;t have — what&#39;s actually deployed, who could realistically attack it, what the data contains. Same treatment as everything else in this project: claims to check, not a checklist to execute on faith.</p>
+
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
