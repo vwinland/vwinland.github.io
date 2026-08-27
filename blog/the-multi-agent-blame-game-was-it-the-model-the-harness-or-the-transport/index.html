@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Multi-Agent Blame Game: Was It the Model, the Harness, or the Transport? | Vanna Winland</title>
+    <meta name="description" content="Tracing three real failures — model, harness, and transport — across multi-agent builds, and why the framework rarely tells you which layer broke." />
+    <link rel="canonical" href="https://vwinland.github.io/blog/the-multi-agent-blame-game-was-it-the-model-the-harness-or-the-transport/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="The Multi-Agent Blame Game: Was It the Model, the Harness, or the Transport?" />
+    <meta property="og:description" content="Tracing three real failures — model, harness, and transport — across multi-agent builds, and why the framework rarely tells you which layer broke." />
+    <meta property="og:url" content="https://vwinland.github.io/blog/the-multi-agent-blame-game-was-it-the-model-the-harness-or-the-transport/" />
+    <meta property="og:image" content="https://vwinland.github.io/projects/essay3_header_agents.png" />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --surface: #fffaf2;
+        --text: #1f1914;
+        --muted: #6b5f54;
+        --border: #ded3c4;
+        --accent: #915f36;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', serif;
+        background: radial-gradient(circle at top, #fff9f0 0%, var(--bg) 55%, #efe2d0 100%);
+        color: var(--text);
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 80px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      article {
+        background: rgba(255, 250, 242, 0.88);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 22px 60px rgba(73, 45, 20, 0.08);
+      }
+      h1 {
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1.08;
+        margin: 0 0 12px;
+      }
+      .meta {
+        color: var(--muted);
+        margin-bottom: 18px;
+        font-size: 0.95rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 24px;
+      }
+      .tags span {
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.78rem;
+        color: var(--muted);
+        background: rgba(255,255,255,0.7);
+      }
+      .hero {
+        margin: 0 0 28px;
+      }
+      .hero img {
+        width: 100%;
+        border-radius: 18px;
+        display: block;
+      }
+      .hero figcaption {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .series-box {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: rgba(255,255,255,0.6);
+        padding: 18px 20px;
+        margin: 0 0 24px;
+      }
+      .series-box p { margin: 0 0 10px; }
+      .series-box p:last-child { margin-bottom: 0; }
+      .series-label {
+        color: var(--accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px !important;
+      }
+      .series-title {
+        margin: 0 0 4px !important;
+        font-size: 1.1rem;
+        font-weight: 700;
+      }
+      .series-progress {
+        margin: 0 0 10px !important;
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .series-links {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .series-links a {
+        color: var(--text);
+        text-decoration: none;
+      }
+      .series-links a:hover {
+        color: var(--accent);
+      }
+      .hero figcaption a,
+      .content a,
+      .back:hover {
+        color: var(--accent);
+      }
+      .content h1,
+      .content h2,
+      .content h3 {
+        line-height: 1.2;
+        margin-top: 2rem;
+      }
+      .content p,
+      .content ul,
+      .content ol,
+      .content blockquote {
+        margin-bottom: 1.25rem;
+      }
+      .content blockquote {
+        border-left: 4px solid var(--accent);
+        margin-left: 0;
+        padding-left: 1rem;
+        color: var(--muted);
+      }
+      .content img {
+        max-width: 100%;
+        border-radius: 14px;
+      }
+      .content code {
+        background: rgba(145, 95, 54, 0.08);
+        padding: 0.15rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .content pre {
+        overflow-x: auto;
+        padding: 1rem;
+        border-radius: 14px;
+        background: #231911;
+        color: #f7efe5;
+      }
+      @media (max-width: 640px) {
+        main { padding: 20px 14px 48px; }
+        article { padding: 22px 18px; border-radius: 18px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="https://vwinland.github.io/blog">Back to blog</a>
+      <article>
+        <header>
+          <h1>The Multi-Agent Blame Game: Was It the Model, the Harness, or the Transport?</h1>
+          <p class="meta">August 27, 2026</p>
+          <p class="tags"><span>AI</span><span>Agentic AI</span><span>Multi-Agent Systems</span><span>Software Engineering</span></p>
+          <figure class="hero"><img src="https://vwinland.github.io/projects/essay3_header_agents.png" alt="The Multi-Agent Blame Game: Was It the Model, the Harness, or the Transport?" /></figure>
+        </header>
+        
+        <section class="series-box">
+          <p class="series-label">Series</p>
+          <p class="series-title">Actually Agentic</p>
+          <p class="series-progress">Part 3 of 5</p>
+          <p>This series explores how agentic systems coordinate, where they fail, and what remains unresolved.</p>
+          <div class="series-links">
+            <a href="https://vwinland.github.io/blog/agentic-coordination-isnt-new-its-25-years-old/">Previous: Agentic Coordination Isn&#39;t New. It&#39;s 25 Years Old</a>
+            
+          </div>
+        </section>
+        <div class="content">
+          <h1>The Multi-Agent Blame Game: Was It the Model, the Harness, or the Transport?</h1>
+<p><em>Tracing three real failures — model, harness, transport — across four multi-agent builds.</em></p>
+<p>The last installment in this series drew a line between having agent components and being agentic, and promised a closer look at what happens once you&#39;re coordinating more than one. This is that installment, and it comes from four crews I&#39;ve built across four different frameworks and protocols: a six-agent PR reviewer on ChatDev, a PRD-writing crew on MetaGPT, a customer-service call-analysis crew on CrewAI, and a songwriting-and-critique crew pairing BeeAI and crewAI agents over ACP. Same shape every time: multiple agents, a coordinator, shared state. But the clearest paper trail is the <a href="https://hackernoon.com/what-building-a-six-agent-ai-code-reviewer-taught-me-about-agentic-systems">PR review crew</a> — I documented it closely enough at the time to reconstruct exactly what broke, and that&#39;s where the rest of this piece comes from.</p>
+<p>The pattern goes back further, actually. <a href="https://www.ibm.com/think/tutorials/chatdev-chatchain-agent-communication-watsonx-ai">My first-ever ChatDev run</a>, building an IBM tutorial a year earlier, failed the same way three times before I traced it to a bad default token budget. That one turned into a full model-backend rebuild — its own story in itself.</p>
+<p>Frameworks give you agent roles and orchestration primitives. Nothing tells you why a handoff actually produced garbage. Was the model reasoning badly? Did the harness pass stale or wrong context between agents? Was it a timing issue — one agent acting on state another hadn&#39;t finished writing? Everyone ships orchestration. Attribution is the part you still have to go looking for.</p>
+<p>Three incidents from the <a href="https://github.com/vwinland/pr-review-crew">PR review crew</a> make the shape of the problem concrete, and in each case the framework told me nothing about which layer to look at. The crew splits the work across six agents — among them a Comment Poster, whose one job is taking a finished review and posting it back to the PR as a GitHub comment.</p>
+<p><strong>The harness didn&#39;t know when to stop.</strong> The Comment Poster agent called <code>post_review_comment</code> 43 times in a single run. ChatDev&#39;s engine has an implicit self-loop — it keeps calling the model until it responds with no tool call — and nothing in that loop told the model a successful call meant it was done. That&#39;s load-bearing engine behavior, and it&#39;s not in the docs or the YAML schema. The fix went into the prompt: &quot;If the conversation already contains a result from <code>post_review_comment</code>... the tool has already succeeded. Do NOT call it again for any reason.&quot; Nothing in the base engine recognized that a successful tool call was already complete work and prevented the model from requesting it again — you have to tell it not to, explicitly, every time.</p>
+<p><strong>The model was fine, until it wasn&#39;t.</strong> One of the review agents came back empty on a reasoning model — no error, no crash, just nothing. Its reasoning tokens had eaten 1,198 of a 1,200-token generation budget. Same prompt, different runs, the reasoning-token usage ranged from about 1,100 tokens up to the full ceiling. There was no bug in my harness to find. The model&#39;s reasoning behavior varied between runs in a way I couldn&#39;t see from the final response, until I found the <code>reasoning_effort</code> parameter — instead of giving the model a bigger budget and hoping it finished in time, I could tell it directly to reason less.</p>
+<p><strong>And sometimes it&#39;s neither.</strong> The Comment Poster&#39;s tool result echoed the full review body back into context — 4,000 characters, duplicated, once in the original input and once in the tool result. That pushed the next request past what the provider would accept, and the API returned a 413: request too large. Nothing wrong with the reasoning, nothing wrong with the prompt. Just a transport-layer ceiling I hit because of how much text was moving between agents.</p>
+<p>Three failures, three layers, and the same lesson each time: the framework will tell you something went wrong. It won&#39;t tell you where.</p>
+<p>When a crew breaks now, this is what I actually check:</p>
+<p><strong>Harness — did the orchestration know the job was done?</strong> Or is it still calling a tool that already succeeded.</p>
+<p><strong>Model — did it have the budget to finish reasoning?</strong> Or did it spend that budget somewhere you can&#39;t see and come back empty.</p>
+<p><strong>Transport — did the payload actually fit through the boundary between agents?</strong> Or did something get duplicated, echoed, or bloated on the way across.</p>
+<p>None of this is specific to ChatDev, and it&#39;s not a ranking of frameworks. LangGraph has <a href="https://github.com/langchain-ai/langgraph/issues/6731">an open issue</a> for the same tool-loop pattern — an agent looping until it hits the recursion limit — and <a href="https://arxiv.org/html/2607.01641v1">recent research on infinite agentic loops</a> treats it as a property of LLM agents generally, not one framework&#39;s flaw. LangGraph&#39;s answer is a <code>recursion_limit</code> parameter: not evidence that the pattern is unique to ChatDev, but a pretty good indication it&#39;s common enough to earn a first-class lever. That&#39;s the actual use of knowing this going in — not picking the framework that promises it won&#39;t happen, but recognizing the shape of the failure before it happens to you, whatever you&#39;re building with.</p>
+<p>None of these three failures showed up in any framework&#39;s error message as &quot;harness bug,&quot; &quot;model behavior,&quot; or &quot;rate limit.&quot; They showed up as &quot;the crew didn&#39;t work,&quot; and figuring out why meant reading a replay log, staring at a token count, and eventually finding a parameter buried in provider docs. That&#39;s the actual cost of multi-agent fragility — not that these systems break, but that nothing in them points you toward why.</p>
+<p>If you&#39;re building or evaluating one of these systems, the practical version of this isn&#39;t &quot;pick a mature framework&quot; — mature frameworks have the same failure modes, they just turn some of them into a named parameter instead of a mystery. It&#39;s knowing the three shapes going in: an orchestration layer that doesn&#39;t know when to stop, a model quietly spending its own budget on thinking you can&#39;t see, and a payload that&#39;s grown past what the transport layer will carry. None of those show up in a demo. All three show up the first time you run something for real.</p>
+<p>That&#39;s also the honest line between a portfolio project and a production system — not whether it works in the demo, but whether you&#39;ve gone looking for these failure modes before they find you.</p>
+
+        </div>
+      </article>
+    </main>
+  </body>
+</html>
